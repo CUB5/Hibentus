@@ -1,0 +1,28 @@
+
+Diseño tablas base de datos
+
+Tablas:
+
+Usuarios:
+
+id, username, password, nombre, correo, rol (base, organizador, admin)
+
+Eventos:
+
+id, nombre, categoria asociada, fecha inicio, fecha fin, nombre del responsable
+
+Categorias:
+
+id, nombre y comentario(opcional)
+
+Comentarios:
+
+id, idusuario(el que hace el comentario), idevento(del que se hace el comentario), comentario
+
+TO DO...
+Registro
+Login
+Comentarios
+Panel Admin
+CRUD EVENTO
+CRUD CATEGORIA
