@@ -55,6 +55,11 @@ class Evento
      */
     private $fechaCreacion;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $descripcion;
+
     public function __construct()
     {
         $this->comentarios = new ArrayCollection();
@@ -163,6 +168,18 @@ class Evento
     public function setFechaCreacion(\DateTimeInterface $fechaCreacion): self
     {
         $this->fechaCreacion = $fechaCreacion;
+
+        return $this;
+    }
+
+    public function getDescripcion(): ?string
+    {
+        return $this->descripcion;
+    }
+
+    public function setDescripcion(?string $descripcion): self
+    {
+        $this->descripcion = $descripcion;
 
         return $this;
     }

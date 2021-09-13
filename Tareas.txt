@@ -21,8 +21,22 @@ id, idusuario(el que hace el comentario), idevento(del que se hace el comentario
 
 TO DO...
 Registro
+    RegistroController
+    Vista
+    RegistroType
+
 Login
-Comentarios
+    php bin/console make:auth
+
+Comentario
+    ComentarioController
+    ComentarioType
+    Vista
+
 Panel Admin
+    Funciones dependiendo de los roles
+    AdminController
+    EditarPerfil
+
 CRUD EVENTO
 CRUD CATEGORIA
