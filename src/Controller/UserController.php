@@ -21,7 +21,7 @@ class UserController extends AbstractController {
     }
 
     /**
-     * @Route("/editUser/{id}", name="editUser")
+     * @Route("/admin/editUser/{id}", name="editUser")
      */
     public function editUser($id, UserRepository $userRepo, Request $request): Response{
         $user=new User();
@@ -44,7 +44,7 @@ class UserController extends AbstractController {
     }
 
     /**
-     * @Route("/addUser", name="addUser")
+     * @Route("/admin/addUser", name="addUser")
      */
     public function addUser(Request $request):Response{
         $user=new User();
@@ -64,7 +64,7 @@ class UserController extends AbstractController {
     }
 
     /**
-     * @Route("/deleteUser/{id}", name="deleteUser")
+     * @Route("/admin/deleteUser/{id}", name="deleteUser")
      */
     public function deleteUser($id, UserRepository $userRepo):Response{
         $user=$userRepo->find($id);

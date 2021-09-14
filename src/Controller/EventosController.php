@@ -43,7 +43,7 @@ class EventosController extends AbstractController {
     }
 
     /**
-     * @Route("/editEvento/{id}", name="editEvento")
+     * @Route("/admin/editEvento/{id}", name="editEvento")
      */
     public function editEvento($id, EventoRepository $eventoRepo, Request $request): Response{
         $evento=new Evento();
@@ -66,7 +66,7 @@ class EventosController extends AbstractController {
     }
 
     /**
-     * @Route("/addEvento", name="addEvento")
+     * @Route("/admin/addEvento", name="addEvento")
      */
     public function addEvento(Request $request):Response{
         $evento=new Evento();
@@ -86,7 +86,7 @@ class EventosController extends AbstractController {
     }
 
     /**
-     * @Route("/deleteEvento/{id}", name="deleteEvento")
+     * @Route("/admin/deleteEvento/{id}", name="deleteEvento")
      */
     public function deleteEvento($id, EventoRepository $eventoRepo):Response{
         $evento=$eventoRepo->find($id);

@@ -24,7 +24,7 @@ class ComentarioController extends AbstractController {
     }
 
     /**
-     * @Route("/editComentario/{id}", name="editComentario")
+     * @Route("/admin/editComentario/{id}", name="editComentario")
      */
     public function editComentario($id, ComentarioRepository $comRepo, Request $request): Response{
         $comentario=new Comentario();
@@ -47,7 +47,7 @@ class ComentarioController extends AbstractController {
     }
 
     /**
-     * @Route("/addComentario", name="addComentario")
+     * @Route("/admin/addComentario", name="addComentario")
      */
     public function addComentario(Request $request):Response{
         $comentario=new Comentario();
@@ -67,7 +67,7 @@ class ComentarioController extends AbstractController {
     }
 
     /**
-     * @Route("/deleteComentario/{id}", name="deleteComentario")
+     * @Route("/admin/deleteComentario/{id}", name="deleteComentario")
      */
     public function deleteComentario($id, ComentarioRepository $comRepo):Response{
         $comentario=$comRepo->find($id);
