@@ -18,7 +18,7 @@ class ComentarioController extends AbstractController {
      */
     public function indexComentario(ComentarioRepository $comRepo,$idUser):Response{
         $listaComentarios=$comRepo->findBy(["id_user_id"=>$idUser]);
-        return $this->render("comentarios/index.html.twig", [
+        return $this->render("comentario/index.html.twig", [
             'listaComentarios'=>$listaComentarios
         ]);
     }
@@ -43,7 +43,7 @@ class ComentarioController extends AbstractController {
             $this->addFlash("succes", "Comentario editado correctamente");
             return $this->redirectToRoute("comentario");
         }
-        return $this->render('comentarios/edit.html.twig', ["form"=>$formVista]);
+        return $this->render('comentario/edit.html.twig', ["form"=>$formVista]);
     }
 
     /**
@@ -61,7 +61,7 @@ class ComentarioController extends AbstractController {
             $this->addFlash("succes", "Comentario creado correctamente");
             return $this->redirectToRoute("comentario");
         }
-        return $this->render("comentarios/edit.html.twig", [
+        return $this->render("comentario/edit.html.twig", [
             "form"=>$formVista
         ]);
     }

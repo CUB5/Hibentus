@@ -23,13 +23,13 @@ class Comentario
     private $comentario;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="comentarios")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comentarios")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idUser;
 
     /**
-     * @ORM\ManyToOne(targetEntity=evento::class, inversedBy="comentarios")
+     * @ORM\ManyToOne(targetEntity=Evento::class, inversedBy="comentarios")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idEvento;

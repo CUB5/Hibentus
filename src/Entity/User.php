@@ -57,10 +57,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $email;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Participante::class, mappedBy="id_usuario")
+     */
+    private $participantes;
+
     public function __construct()
     {
         $this->eventos = new ArrayCollection();
         $this->comentarios = new ArrayCollection();
+        $this->participantes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -227,6 +233,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Participante[]
+     */
+    public function getParticipantes(): Collection
+    {
+        return $this->participantes;
+    }
+
+    public function addParticipante(Participante $participante): self
+    {
+        if (!$this->participantes->contains($participante)) {
+            $this->participantes[] = $participante;
+            $participante->setIdUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipante(Participante $participante): self
+    {
+        if ($this->participantes->removeElement($participante)) {
+            // set the owning side to null (unless already changed)
+            if ($participante->getIdUsuario() === $this) {
+                $participante->setIdUsuario(null);
+            }
+        }
 
         return $this;
     }

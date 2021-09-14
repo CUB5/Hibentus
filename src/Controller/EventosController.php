@@ -20,7 +20,7 @@ class EventosController extends AbstractController {
      */
     public function indexEvento(EventoRepository $eventoRepo, ComentarioRepository $comRepo):Response{
         $listaEvento=$eventoRepo->findAll();
-        return $this->render("eventos/index.html.twig", [
+        return $this->render("evento/index.html.twig", [
             'listaEventos'=>$listaEvento
         ]);
     }
@@ -36,7 +36,7 @@ class EventosController extends AbstractController {
             return $this->redirectToRoute("evento");
         }
         $comentarios=$comRepo->findBy(["id_evento_id"=>$id]);
-        return $this->render("eventos/vista.html.twig", [
+        return $this->render("evento/vista.html.twig", [
             "evento"=>$evento,
             "lstComentarios"=>$comentarios
         ]);
@@ -62,7 +62,7 @@ class EventosController extends AbstractController {
             $this->addFlash("succes", "Evento editado correctamente");
             return $this->redirectToRoute("evento");
         }
-        return $this->render('eventos/edit.html.twig', ["form"=>$formVista]);
+        return $this->render('evento/edit.html.twig', ["form"=>$formVista]);
     }
 
     /**
@@ -80,7 +80,7 @@ class EventosController extends AbstractController {
             $this->addFlash("succes", "Evento creado correctamente");
             return $this->redirectToRoute("evento");
         }
-        return $this->render("eventos/edit.html.twig", [
+        return $this->render("evento/edit.html.twig", [
             "form"=>$formVista
         ]);
     }

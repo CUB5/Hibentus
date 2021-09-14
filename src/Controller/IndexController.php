@@ -14,9 +14,11 @@ class IndexController extends AbstractController {
      * @Route("/", name="index")
      */
     public function index(EventoRepository $eventoRepo, CategoriaRepository $catRepo):Response{
+        $eventos=$eventoRepo->findAll();
+        $categorias=$catRepo->findAll();
         return $this->render('index/index.html.twig', [
-            'lstEventos'=>$eventoRepo,
-            'lstCat'=>$catRepo
+            'lstEventos'=>$eventos,
+            'lstCat'=>$categorias
         ]);
     }
 

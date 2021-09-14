@@ -35,13 +35,13 @@ class Evento
     private $fechaFin;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="eventos")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="eventos")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idUser;
 
     /**
-     * @ORM\ManyToOne(targetEntity=categoria::class, inversedBy="eventos")
+     * @ORM\ManyToOne(targetEntity=Categoria::class, inversedBy="eventos")
      */
     private $idCategoria;
 
@@ -60,9 +60,15 @@ class Evento
      */
     private $descripcion;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Participante::class, mappedBy="id_evento")
+     */
+    private $participantes;
+
     public function __construct()
     {
         $this->comentarios = new ArrayCollection();
+        $this->participantes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -180,6 +186,36 @@ class Evento
     public function setDescripcion(?string $descripcion): self
     {
         $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Participante[]
+     */
+    public function getParticipantes(): Collection
+    {
+        return $this->participantes;
+    }
+
+    public function addParticipante(Participante $participante): self
+    {
+        if (!$this->participantes->contains($participante)) {
+            $this->participantes[] = $participante;
+            $participante->setIdEvento($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipante(Participante $participante): self
+    {
+        if ($this->participantes->removeElement($participante)) {
+            // set the owning side to null (unless already changed)
+            if ($participante->getIdEvento() === $this) {
+                $participante->setIdEvento(null);
+            }
+        }
 
         return $this;
     }

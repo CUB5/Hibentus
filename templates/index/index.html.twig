@@ -1,12 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1 class="prueba">hola</h1>
-<h1 class="prueba">hola</h1>
-<h1 class="prueba">hola</h1>
-<h1 class="prueba">hola</h1>
-
-<h1 class="prueba">hola</h1>
-<h1 class="prueba">hola</h1>
-<h1 class="prueba">hola</h1>
+    {% for evento in lstEventos %}
+        <h1>{{ evento.nombre }}</h1>
+    {% endfor %}
 {% endblock %}

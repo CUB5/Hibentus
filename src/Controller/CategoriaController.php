@@ -22,12 +22,13 @@ class CategoriaController extends AbstractController {
         $form=$this->createForm(CategoriaTipoType::class);
         $form->handleRequest($request);
         $formVista=$form->createView();
+        $categorias=$catRepo->findAll();
         if($form->isSubmitted()&&$form->isValid()){
             $id=$form->getData('id_categoria_id');
             return $this->redirectToRoute("/categoria/$id");
         }
         return $this->render('categoria/index.html.twig', [
-            'lstCat'=>$catRepo,
+            'lstCat'=>$categorias,
             "form"=>$formVista
         ]);
     }
@@ -47,7 +48,7 @@ class CategoriaController extends AbstractController {
     }
 
      /**
-     * @Route("/editCategoria/{id}", name="editCategoria")
+     * @Route("/admin/editCategoria/{id}", name="editCategoria")
      */
     public function editCategoria($id, CategoriaRepository $catRepo, Request $request): Response{
         $categoria=new Categoria();
@@ -66,11 +67,11 @@ class CategoriaController extends AbstractController {
             $this->addFlash("succes", "Categoría editada correctamente");
             return $this->redirectToRoute("indexCategoria");
         }
-        return $this->render('categorias/edit.html.twig', ["form"=>$formVista]);
+        return $this->render('categoria/edit.html.twig', ["form"=>$formVista]);
     }
 
     /**
-     * @Route("/addCategoria", name="addCategoria")
+     * @Route("/admin/addCategoria", name="addCategoria")
      */
     public function addCategoria(Request $request):Response{
         $categoria=new Categoria();
@@ -84,13 +85,13 @@ class CategoriaController extends AbstractController {
             $this->addFlash("succes", "Categoría creada correctamente");
             return $this->redirectToRoute("indexCategoria");
         }
-        return $this->render("categorias/edit.html.twig", [
+        return $this->render("categoria/edit.html.twig", [
             "form"=>$formVista
         ]);
     }
 
     /**
-     * @Route("/deleteCategoria/{id}", name="deleteCategoria")
+     * @Route("/admin/deleteCategoria/{id}", name="deleteCategoria")
      */
     public function deleteCategoria($id, CategoriaRepository $catRepo):Response{
         $categoria=$catRepo->find($id);
