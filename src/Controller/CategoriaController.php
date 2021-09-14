@@ -19,14 +19,22 @@ class CategoriaController extends AbstractController {
      * @Route("/indexCategoria", name="indexCategoria")
      */
     public function indexCategoria(CategoriaRepository $catRepo, Request $request):Response{
-        $form=$this->createForm(CategoriaTipoType::class);
+        $form=$this->createForm(CategoriaType::class);
         $form->handleRequest($request);
         $formVista=$form->createView();
         $categorias=$catRepo->findAll();
-        if($form->isSubmitted()&&$form->isValid()){
-            $id=$form->getData('id_categoria_id');
-            return $this->redirectToRoute("/categoria/$id");
-        }
+            if($form->isSubmitted()&&$form->isValid()){
+
+                //$cat = $catRepo->findOneBy(array('nombre' => 'categoria'));
+
+                $cat = $form->get("categoria")->getData();
+
+                $id = $cat->getId();
+                //$id = 2;
+
+                //$id = $form->getData('categoria');
+                return $this->redirectToRoute("categoria", ["id" => $id]);
+            }
         return $this->render('categoria/index.html.twig', [
             'lstCat'=>$categorias,
             "form"=>$formVista
@@ -37,7 +45,7 @@ class CategoriaController extends AbstractController {
      * @Route("/categoria/{id}", name="categoria")
      */
     public function eventosCategoria($id, EventoRepository $eventoRepo){
-        $eventos=$eventoRepo->findBy(["id_categoria_id"=>$id]);
+        $eventos=$eventoRepo->findBy(["idCategoria"=>$id]);
         if(empty($eventos)){
             $this->addFlash("danger", "No se han encontrado eventos");
         }else{
