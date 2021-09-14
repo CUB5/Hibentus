@@ -1,0 +1,42 @@
+
+
+.wrap_header_cnt { position: relative; max-width:1200px; margin: 0 auto; }
+#cntHeader { background-color: green; }
+#header { padding-left: 55px; padding-top: 15px;padding-bottom: -5px;margin-bottom: -15px;}
+#header > div {float: left; width: 50%; min-height: 1px;}
+#header_left {margin-top: 15px;}
+#header_center { text-align: center; }
+#header_right { text-align: right;}
+#header_buttons { margin-top: 5px;}
+
+#banner { font-size: large; }
+
+#cntNav {padding-top: 10px;}
+
+#menu li { display: inline-block; }
+#menu li a { display: block; padding: 10px; text-decoration: none; color:#000; }
+#menu li:hover a { background-color: #333; color:#fafafa; }
+
+
+
+.wrap_cnt { position: relative; overflow: hidden; max-width:1200px; margin: 0 auto; }
+
+#wrapper {padding-left: 25px; margin-bottom: 15px; background-color: aqua;}
+#content { float: left; padding: 10; width: 80%; background-color: #fff;  }
+
+
+
+
+
+
+
+
+
+
+
+
+#cntFooter { background-color: black; color:white; position: absolute; bottom: 0; width: 100%;}
+#footer { padding: 20px 15px 10px; }
+#footer > div { float: left; width: 33%; min-height: 1px; }
+#footer_left { text-align: left; padding-left: 40px; }
+#footer_right { text-align: right; padding-right: 40px; }

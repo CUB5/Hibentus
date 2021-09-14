@@ -1,11 +1,45 @@
 <div id="cntHeader">
 
-    <div id="cntLogin">
-        Buenos días
-    </div>
+    <div id="header" class="wrap_cnt">
 
-    <div id="menu">
-        Menú
-    </div>
+            <div id="header_left">
+              <h1>HIBENTUS</h1>
+              <h3>Bienvendio a tu pagina de eventos</h3>
+            </div>
+            
+            <div id="header_right">
+                <h1>¡Bienvenido!</h1>
+                
+                <form method="post" action="">
+                    <label for="username"></label>
+                    <input type="text" name="username" id="username" placeholder="Nombre de Usuario" disabled="true">
+    
+                    <br>
+    
+                    <label for="clave"></label>
+                    <input type="password" name="clave" id="clave" placeholder="Contraseña" disabled="true">
+                    <br>
+                    <input type="submit" name="btnLogin" value="Iniciar sessión" hidden="true">
+    
+                </form>   
+                <div id="header_buttons">
+                    <a href="/login" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Iniciar Sesion</a>         
+                    <a href="/registro" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Registrarse</a>         
+                </div>
+            </div>
+            
+        
 
+    </div>
+    <div id="cntNav">
+        <nav class="wrap_header_cnt">
+            <ul id="menu">
+                <li><a href="">Inicio</a></li>
+                <li><a href="">Eventos</a></li>
+                <li><a href="">Admin Eventos</a></li>
+                <li><a href="">Admin</a> </li>
+                <li><a href="">Panel de Usuario</a></li>
+            </ul>
+        </nav>
+    </div>
 </div>
