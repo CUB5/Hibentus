@@ -20,23 +20,54 @@ Comentarios:
 id, idusuario(el que hace el comentario), idevento(del que se hace el comentario), comentario
 
 TO DO...
-Registro
+Registro        2 horas
     RegistroController
     Vista
     RegistroType
 
-Login
+Login           2 horas
     php bin/console make:auth
 
-Comentario
+Comentario      1 hora
     ComentarioController
     ComentarioType
     Vista
 
-Panel Admin
+Panel Admin     3 horas
     Funciones dependiendo de los roles
     AdminController
     EditarPerfil
+    USUARIO ADMINISTRADOR 2 horas
+        Editar Usuario
+        Eliminar Usuario
+        Añadir Usuario
 
-CRUD EVENTO
-CRUD CATEGORIA
+CRUD EVENTO     2 horas
+    Editar Evento
+    Eliminar Evento
+    Añadir Evento
+
+CRUD CATEGORIA  2 horas
+    Editar categoria
+    Eliminar categoria
+    Añadir categoria
+
+CRUD COMENTARIO 2 horas
+    Editar comentario
+    Eliminar comentario
+    Añadir comentario
+
+VISTAS 5 horas
+    index
+    categoria
+    iniciar sesión
+    Registro
+    admin
+        crud Evento
+        crud de categoria
+        crud Usuario
+    mi cuenta
+        crud de propio usuarop
+        crud de comentario
+    vista evento
+    
