@@ -21,7 +21,7 @@ class Participante
      * @ORM\ManyToOne(targetEntity=Evento::class, inversedBy="participantes")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $id_evento;
+    private $idEvento;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="participantes")
@@ -34,14 +34,14 @@ class Participante
         return $this->id;
     }
 
-    public function getIdEvento(): ?Evento
+    public function getIdEvento(): ?evento
     {
-        return $this->id_evento;
+        return $this->idEvento;
     }
 
-    public function setIdEvento(?Evento $id_evento): self
+    public function setIdEvento(?evento $idEvento): self
     {
-        $this->id_evento = $id_evento;
+        $this->idEvento = $idEvento;
 
         return $this;
     }

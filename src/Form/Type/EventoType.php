@@ -23,8 +23,8 @@ class EventoType extends AbstractType{
             ->add('fecha_inicio', DateTimeType::class)
             ->add('fecha_fin', DateTimeType::class)
             ->add('descripcion', TextareaType::class)
-            ->add('id_categoria_id', CategoriaTipoType::class)
-            ->add('id_user_id', UserTipoType::class)
+            ->add('idCategoria', CategoriaTipoType::class)
+            ->add('idUser', UserTipoType::class)
             ->add('btnEnviar', SubmitType::class, ["label"=>"Guardar"]);
     }
 

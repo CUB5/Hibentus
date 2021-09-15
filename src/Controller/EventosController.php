@@ -9,36 +9,45 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use App\Repository\EventoRepository;
 use App\Repository\CategoriaRepository;
+use App\Repository\ParticipanteRepository;
 Use App\Entity\Evento;
 use App\Form\Type\EventoType;
 use App\Repository\ComentarioRepository;
+use App\Repository\UserRepository;
+use DateTime;
 
 class EventosController extends AbstractController {
 
     /**
      * @Route("/evento", name="evento")
      */
-    public function indexEvento(EventoRepository $eventoRepo, ComentarioRepository $comRepo):Response{
+    public function indexEvento(EventoRepository $eventoRepo, UserRepository $userRepo, CategoriaRepository $catRepo):Response{
         $listaEvento=$eventoRepo->findAll();
+        $listaUser=$userRepo->findAll();
+        $listaCategorias=$catRepo->findAll();
         return $this->render("evento/index.html.twig", [
-            'listaEventos'=>$listaEvento
+            'listaEventos'=>$listaEvento,
+            'listaCat'=>$listaCategorias,
+            'listaUser'=>$listaUser
         ]);
     }
 
     /**
      * @Route("/vistaEvento/{id}", name="vistaEvento")
      */
-    public function vistaEvento(EventoRepository $eventoRepo, ComentarioRepository $comRepo, $id):Response{
+    public function vistaEvento(EventoRepository $eventoRepo, ComentarioRepository $comRepo, ParticipanteRepository $partRepo ,$id):Response{
         $evento=new Evento();
         $evento=$eventoRepo->find($id);
         if($evento==null){
             $this->addFlash("danger", "Evento no encontrada");
             return $this->redirectToRoute("evento");
         }
-        $comentarios=$comRepo->findBy(["id_evento_id"=>$id]);
+        $comentarios=$comRepo->findByIdEvento(["id_evento_id"=>$id]);
+        $participantes=$partRepo->findByIdEvento(["id_evento_id"=>$id]);
         return $this->render("evento/vista.html.twig", [
             "evento"=>$evento,
-            "lstComentarios"=>$comentarios
+            "lstComentarios"=>$comentarios,
+            "lstParticipantes"=>$participantes
         ]);
     }
 
@@ -75,6 +84,8 @@ class EventosController extends AbstractController {
         $formVista=$form->createView();
         if($form->isSubmitted()&&$form->isValid()){
             $evento=$form->getData();
+            $fechaCreacion=new \DateTime();
+            $evento->setFechaCreacion($fechaCreacion);
             $this->getDoctrine()->getManager()->persist($evento);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash("succes", "Evento creado correctamente");

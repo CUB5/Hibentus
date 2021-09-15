@@ -2,6 +2,23 @@
 
 {% block body %}
     {% for evento in lstEventos %}
-        <h1>{{ evento.nombre }}</h1>
+        <div id="eventoIndex">
+            <a href="{{ path("vistaEvento", {id: evento.id}) }}">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <h1>{{ evento.nombre }}</h1>
+                    </div>
+                    <div id="fechasEvento" class="col-lg-4">
+                        Fecha inicio: {{evento.fechaInicio|date("d/m/Y")}}<br>
+                        Fecha fin: {{evento.fechaFin|date("d/m/Y")}}
+                    </div>
+                    <div class="col-lg-4">
+                        <h1>Imagen</h1>
+                    </div>
+                </div>
+                <h5>{{ evento.idCategoria.nombre }}</h5>
+                {{ evento.descripcion }}
+            </a>
+        </div>
     {% endfor %}
 {% endblock %}

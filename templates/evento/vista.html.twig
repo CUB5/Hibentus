@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="eventoVista">
+        <div id="eventoInfo">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1 id="tituloEvento">{{evento.nombre}}</h1>
+                </div>
+                <div id="fechasEvento" class="col-lg-6">
+                    Fecha inicio: {{evento.fechaInicio|date("d/m/Y")}}<br>
+                    Fecha fin: {{evento.fechaFin|date("d/m/Y")}}
+                </div>
+            </div>
+            <div id="eventoContenido">
+                <h5>{{evento.idCategoria.nombre}}</h5>
+                <p>{{evento.descripcion}}</p>
+            <div>
+            <footer>
+                <div class="row">
+                    <div id="organizador" class="col-lg-6">
+                        Organizador: {{evento.idUser.nombre}}
+                    </div>
+                    <div id="fechaCreacion" class="col-lg-6">
+                        Fecha creación: {{evento.fechaCreacion|date("d/m/Y")}}
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <div class="row">
+            <div id="eventoComentarios" class="col-lg-8">
+                <h3>Comentarios</h3>
+                {% for com in lstComentarios %}
+                    <div id="comentario">
+                        {{ com.idUser.nombre }}: {{com.comentario}}
+                    </div>
+                {% endfor %}
+            </div>
+            <div id="imagenEvento" class="col-lg-4">
+                <h1>Imagen</h1>
+            </div>
+            <div id="eventoParticipantes" class="col-lg-8">
+                <h3>Participantes</h3>
+                <ul>
+                    {% for part in lstParticipantes %}
+                        <div id="participante">
+                            <li>{{ part.idUsuario.nombre }}</li>
+                        </div>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div id="eventoBoton">
+            <!--Si usuario está registrado que le aparezcan botón para apuntarse y para comentar-->
+            <a href="" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Apuntarse</a>
+            <a href="" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Comentar</a><br>
+        </div>
+    </div>
+{% endblock %}

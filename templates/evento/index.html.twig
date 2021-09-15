@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+     <a href="{{ path('addEvento') }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Añadir</a>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Fecha inicio</th>
+            <th>Fecha fin</th>
+            <th>Organizador</th>
+            <th>Categoria</th>
+            <th>Acciones</th>
+        </tr>
+    {% for evento in listaEventos %}
+        <tr>
+            <td>{{evento.id}}</td>
+            <td>{{evento.nombre}}</td>
+            <td>{{evento.fechaInicio|date("d/m/Y")}}</td>
+            <td>{{evento.fechaFin|date("d/m/Y")}}</td>
+            <td>{{evento.idUser.nombre}}
+            <td>{{evento.idCategoria.nombre}}</td>
+            <td>
+                <a href="{{ path('editEvento', {id: evento.id}) }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Editar</a><br>
+                <a href="{{ path('deleteEvento', {id: evento.id}) }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Eliminar</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
