@@ -12,6 +12,8 @@ use App\Repository\EventoRepository;
 Use App\Entity\Categoria;
 use App\Form\Type\CategoriaTipoType;
 use App\Form\Type\CategoriaType;
+use App\Form\Type\CategoriaCreateType;
+
 
 class CategoriaController extends AbstractController {
 
@@ -55,6 +57,16 @@ class CategoriaController extends AbstractController {
         }
     }
 
+    /**
+     * @Route("/admin/categoria", name="adminCategoria")
+    */
+    public function adminCategoria(CategoriaRepository $catRepo ){
+        $categorias=$catRepo->findAll();
+        return $this->render('categoria/admin.html.twig', [
+            'lstCat'=>$categorias,
+        ]);
+    }
+
      /**
      * @Route("/admin/editCategoria/{id}", name="editCategoria")
      */
@@ -65,17 +77,23 @@ class CategoriaController extends AbstractController {
             $this->addFlash("danger", "Categoría no encontrada");
             return $this->redirectToRoute("indexCategoria");
         }
-        $form=$this->createForm(CategoriaType::class, $categoria);
+        $form=$this->createForm(CategoriaCreateType::class, $categoria);
         $form->handleRequest($request);
         $formVista=$form->createView();
         if($form->isSubmitted()&&$form->isValid()){
-            $categoria=$form->getData();
+            //$categoria=$form->getData();
+
+            $categoria->setNombre($form["categoria"]->getData());
+            $categoria->setComentario($form["text"]->getData());
+
             $this->getDoctrine()->getManager()->persist($categoria);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash("succes", "Categoría editada correctamente");
-            return $this->redirectToRoute("indexCategoria");
+            return $this->redirectToRoute("adminCategoria");
         }
-        return $this->render('categoria/edit.html.twig', ["form"=>$formVista]);
+        return $this->render('categoria/edit.html.twig', [
+            "form"=>$formVista
+        ]);
     }
 
     /**
@@ -83,15 +101,22 @@ class CategoriaController extends AbstractController {
      */
     public function addCategoria(Request $request):Response{
         $categoria=new Categoria();
-        $form=$this->createForm(CategoriaType::class, $categoria);
+        $form=$this->createForm(CategoriaCreateType::class, $categoria);
         $form->handleRequest($request);
         $formVista=$form->createView();
+
         if($form->isSubmitted()&&$form->isValid()){
             $categoria=$form->getData();
+
+            //$categoria->setNombre($form["categoria"]->getData());
+            //$categoria->setComentario($form["text"]->getData());
+
+
             $this->getDoctrine()->getManager()->persist($categoria);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash("succes", "Categoría creada correctamente");
-            return $this->redirectToRoute("indexCategoria");
+
+            return $this->redirectToRoute("adminCategoria");
         }
         return $this->render("categoria/edit.html.twig", [
             "form"=>$formVista
@@ -110,7 +135,7 @@ class CategoriaController extends AbstractController {
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash("success", "Se ha eliminado la categoría");
         }
-        return $this->redirectToRoute("indexCategoria");
+        return $this->redirectToRoute("adminCategoria");
     }
 
 }
