@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <a href="{{ path('addCategoria') }}"class="btn btn-info btn-sm active" role="button">Crear</a>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Acciones</th>
+
+        </tr>
+
+            {% for categoria in lstCat %}
+            <tr>
+                <td>{{ categoria.id}}</td>
+                <td>{{ categoria.nombre}}</td>
+                <td>
+                    <a href="{{ path('editCategoria', {'id': categoria.id }) }}"class="btn btn-primary btn-sm active" role="button">Actualizar</a>
+                    <a href="{{ path('deleteCategoria', {'id': categoria.id }) }}"class="btn btn-warning btn-sm active" role="button">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+
+    </table>
+
+{% endblock body %}

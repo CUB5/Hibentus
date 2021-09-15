@@ -1,0 +1,9 @@
+{% extends 'base.html.twig'%}
+
+{% block body %}
+
+    {% for evento in lstEventos %}
+        <h1>{{ evento.nombre }}</h1>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig'%}
+
+{% block body %}
+
+    {{ form(form) }}
+    
+    {% for categoria in lstCat %}
+        <h1>{{ categoria.nombre}}</h1>
+    {% endfor %}
+
+{% endblock %}
