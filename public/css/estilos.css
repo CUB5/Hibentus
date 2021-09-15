@@ -21,7 +21,7 @@
 
 .wrap_cnt { position: relative; overflow: hidden; max-width:1200px; margin: 0 auto; }
 
-#wrapper {padding-left: 25px; margin-bottom: 15px; background-color: white;}
+#wrapper {padding-left: 25px; margin-bottom: 70px; background-color: white;}
 #content { float: left; padding: 10; width: 80%; background-color: #fff;  }
 
 
@@ -35,7 +35,7 @@
 
 
 
-#cntFooter { background-color: black; color:white; position: absolute; bottom: 0; width: 100%;}
+#cntFooter { background-color: black; color:white; position: fixed; left: 0; bottom: 0; width: 100%;}
 #footer { padding: 20px 15px 10px; }
 #footer > div { float: left; width: 33%; min-height: 1px; }
 #footer_left { text-align: left; padding-left: 40px; }
