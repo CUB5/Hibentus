@@ -19,6 +19,32 @@ class CategoriaRepository extends ServiceEntityRepository
         parent::__construct($registry, Categoria::class);
     }
 
+    public function paginate($sql, $page = 1, $limit = 10){
+        $paginador = new Paginator($sql);
+
+        $paginador->getQuery()
+                ->setFirstResult($limit * ($page - 1))
+                ->setMaxResults($limit);
+
+        return $paginador;
+    }
+
+    public function findAllPaginado($page=1, $limit = 10){
+        $qb = $this->createQueryBuilder('c');
+
+        $query = $qb->getQuery();
+
+        $paginador = $this->paginate($query, $page, $limit);
+        $nMaxPages = ceil($paginador->count()/$limit);
+
+        return [
+            "paginador" => $paginador,
+            "nMaxPages" => $nMaxPages,
+            "res" => $query->getResult()
+        ];
+
+    }
+
     // /**
     //  * @return Categoria[] Returns an array of Categoria objects
     //  */

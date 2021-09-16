@@ -11,14 +11,16 @@ use App\Repository\CategoriaRepository;
 class IndexController extends AbstractController {
 
     /**
-     * @Route("/", name="index")
+     * @Route("/{page<\d+>}", name="index")
      */
-    public function index(EventoRepository $eventoRepo, CategoriaRepository $catRepo):Response{
-        $eventos=$eventoRepo->findAll();
+    public function index($page=1, EventoRepository $eventoRepo, CategoriaRepository $catRepo):Response{
+        $eventos=$eventoRepo->findAllPaginado($page);
         $categorias=$catRepo->findAll();
         return $this->render('index/index.html.twig', [
-            'lstEventos'=>$eventos,
-            'lstCat'=>$categorias
+            'lstEventos'=>$eventos["res"],
+            'lstCat'=>$categorias,
+            'page' => $page,
+            'nMaxPages' => $eventos["nMaxPages"]
         ]);
     }
 

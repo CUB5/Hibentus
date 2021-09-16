@@ -8,8 +8,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 use App\Repository\CategoriaRepository;
+use App\Repository\UserRepository;
 use App\Repository\EventoRepository;
 Use App\Entity\Categoria;
+Use App\Entity\User;
 use App\Form\Type\CategoriaTipoType;
 use App\Form\Type\CategoriaType;
 use App\Form\Type\CategoriaCreateType;
@@ -60,14 +62,17 @@ class CategoriaController extends AbstractController {
     /**
      * @Route("/admin/categoria", name="adminCategoria")
     */
-    public function adminCategoria(CategoriaRepository $catRepo ){
+    public function adminCategoria(CategoriaRepository $catRepo, UserRepository $userRepo){
+        $user=$userRepo->findAll();
         $categorias=$catRepo->findAll();
         return $this->render('categoria/admin.html.twig', [
             'lstCat'=>$categorias,
+            'lstUsr'=>$user
         ]);
     }
 
-     /**
+    
+    /**
      * @Route("/admin/editCategoria/{id}", name="editCategoria")
      */
     public function editCategoria($id, CategoriaRepository $catRepo, Request $request): Response{

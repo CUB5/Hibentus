@@ -1,5 +1,40 @@
 {% extends 'base.html.twig'%}
 
 {% block body %}
+
+<div id="user_panel">
+    <div>
+        <img id="user_img" src="{{ asset('images/defaults/profile_default.png') }}"/>
+
+    </div>
+    <div id="user_data">
+        <div id="inline">
+            <p> Nombre de Usuario: </p> {{ app.user.username }}
+            <a href="{{ path('editUser', {'param': 1, 'id': app.user.id})}}">Editar</a>
+        </div>
+        <div id="inline">
+            <p> Cambiar Contraseña:</p>
+            <a href="">Cambiar</a>
+        </div>
+        <div id="inline">
+            <p> Nombre: </p> {{ app.user.nombre }}
+            <a href="{{ path('editUser', {'param': 2, 'id': app.user.id})}}">Editar</a>
+        </div>
+        <div id="inline">
+            <p> ROL: </p> {{ app.user.roles|join(', ') }}
+        </div>
+        <div id="inline">
+            <P> email: </P> {{ app.user.email}}
+            <a href="{{ path('editUser', {'param': 3, 'id': app.user.id})}}">Editar</a>
+
+        </div>
+        
+    <div>
+        <a href="{{ path('index')}}" class="btn btn-primary btn-sm active" role="button">Volver</a>
+    </div>
+        
+        
+    </div>
+</div>
     
 {% endblock body %}

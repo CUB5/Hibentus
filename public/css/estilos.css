@@ -91,3 +91,7 @@ td a{
     color:darkblue;
 }
 
+#user_panel {margin-top: 30px; margin-left: 100px}
+#user_data p {display: block;}
+#inline p {display: inline; font-weight: bold;}
+#user_img { width: 100px; margin-bottom: 30px;}

@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
     {% for evento in lstEventos %}
         <div id="eventoIndex">
             <a href="{{ path("vistaEvento", {id: evento.id}) }}">
@@ -21,4 +22,6 @@
             </a>
         </div>
     {% endfor %}
+
+    {% include 'inc/paginador.tpl.twig' with {routerName: 'index'} %}
 {% endblock %}

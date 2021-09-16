@@ -1,0 +1,13 @@
+<p class="pagination">
+    {% if nMaxPages > 1 %}
+        {% for i in 1..nMaxPages %}
+            {% set urlParam = {page:i} %}
+
+            {% if extra_params is defined %}
+                {% set urlParam = urlParam|merge(extra_params) %}
+            {% endif %}
+
+            <a class="page-link" href="{{ path(routerName, urlParam) }}">{{ i }}</a>        
+        {% endfor %}
+    {% endif %}
+</p>

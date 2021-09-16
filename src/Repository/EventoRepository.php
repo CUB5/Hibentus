@@ -6,6 +6,8 @@ use App\Entity\Evento;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 /**
  * @method Evento|null find($id, $lockMode = null, $lockVersion = null)
  * @method Evento|null findOneBy(array $criteria, array $orderBy = null)
@@ -17,6 +19,32 @@ class EventoRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Evento::class);
+    }
+
+    public function paginate($sql, $page = 1, $limit = 10){
+        $paginador = new Paginator($sql);
+
+        $paginador->getQuery()
+                ->setFirstResult($limit * ($page - 1))
+                ->setMaxResults($limit);
+
+        return $paginador;
+    }
+
+    public function findAllPaginado($page=1, $limit = 10){
+        $qb = $this->createQueryBuilder('c');
+
+        $query = $qb->getQuery();
+
+        $paginador = $this->paginate($query, $page, $limit);
+        $nMaxPages = ceil($paginador->count()/$limit);
+
+        return [
+            "paginador" => $paginador,
+            "nMaxPages" => $nMaxPages,
+            "res" => $query->getResult()
+        ];
+
     }
 
     // /**

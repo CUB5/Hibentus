@@ -7,7 +7,7 @@
 
 {% block body %}
 
-    <a href="{{ path('addCategoria') }}"class="btn btn-info btn-sm active" role="button">Crear</a>
+    <a href="{{ path('addCategoria') }}"class="btn btn-info btn-sm active" role="button">Crear Categoria</a>
 
     <table>
         <tr>
@@ -24,6 +24,38 @@
                 <td>
                     <a href="{{ path('editCategoria', {'id': categoria.id }) }}"class="btn btn-primary btn-sm active" role="button">Actualizar</a>
                     <a href="{{ path('deleteCategoria', {'id': categoria.id }) }}"class="btn btn-warning btn-sm active" role="button">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+
+    </table>
+    
+    <h1>Lista de usuarios</h1>
+    
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Modificar</th>
+
+        </tr>
+
+            {% for key in lstUsr %}
+            <tr>
+                <td>{{ key.id}}</td>
+                <td>{{ key.nombre}}</td>
+                <td>{{ key.username }}</td>
+                <td>{{ key.email }}</td>
+                <td>{{ key.roles|join(', ') }}</td>
+                <td>
+                    <a href="{{ path('editUser', {'param': 1, 'id': key.id})}}">Nombre de Usuario</a>
+                    <a href="{{ path('editUser', {'param': 2, 'id': key.id})}}">Username</a>
+                    <a href="{{ path('editUser', {'param': 3, 'id': key.id})}}">Email</a>
+                    <a href="{{ path('editUserRole', {'id': key.id})}}">Rol</a>
+                    <a href="{{ path('deleteUser', {'id': key.id}) }}">Eliminar</a>
                 </td>
             </tr>
             {% endfor %}
