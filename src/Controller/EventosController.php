@@ -111,6 +111,21 @@ class EventosController extends AbstractController {
         return $this->redirectToRoute("evento");
     }
 
+    /**
+     * @Route("/eventosActivos", name="eventosActivos")
+     */
+    public function eventosActivos(EventoRepository $eventoRepo):Response{
+        $fechaActual=new \DateTime();
+        $consultaActivos=$eventoRepo->createQueryBuilder('e')
+            ->where(":fechaActual BETWEEN e.fechaInicio AND  e.fechaFin")
+            ->setParameter('fechaActual', $fechaActual)
+            ->getQuery();
+        $eventosActivos=$consultaActivos->getResult();
+        return $this->render("evento/activos.html.twig", [
+            "eventosActivos"=>$eventosActivos
+        ]);
+    }
+
 }
 
 ?>
