@@ -37,9 +37,13 @@
                 {% endfor %}
             </div>
             <div id="imagenEvento" class="col-lg-4">
-                <h1>Imagen</h1>
+                {% if evento.imagen %}
+                    <img src="{{ asset(evento.imagen)}}">
+                {% else %}
+                    <img src="{{ asset('imgs/imgCat/cat' ~ evento.idCategoria.id ~ '.png') }}">
+                {% endif %}
             </div>
-            <div id="eventoParticipantes" class="col-lg-8">
+            <div id="eventoParticipantes">
                 <h3>Participantes</h3>
                 <ul>
                     {% for part in lstParticipantes %}
