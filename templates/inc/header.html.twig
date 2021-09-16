@@ -24,7 +24,7 @@
                 </form>   
                 <div id="header_buttons">
                     <a href="/login" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Iniciar Sesion</a>         
-                    <a href="/registro" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Registrarse</a>         
+                    <a href="{{ path('registro') }}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Registrarse</a>         
                 </div>
             </div>
             
@@ -39,7 +39,7 @@
                 <li><a href="{{ path("evento") }}">Eventos</a></li>
                 <li><a href="">Admin Eventos</a></li>
                 <li><a href="{{ path('adminCategoria') }}">Admin</a> </li>
-                <li><a href="">Panel de Usuario</a></li>
+                <li><a href="{{ path('user') }}">Panel de Usuario</a></li>
             </ul>
         </nav>
     </div>
