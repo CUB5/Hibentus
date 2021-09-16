@@ -22,10 +22,16 @@
                     <input type="submit" name="btnLogin" value="Iniciar sessión" hidden="true">
     
                 </form>--> 
-                <div id="header_buttons">
-                    <a href="{{ path('app_login') }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Iniciar Sesion</a>         
-                    <a href="{{ path('registro') }}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Registrarse</a>         
-                </div>
+                {% if app.user %}
+                    <div id="header_buttons">
+                        <a href="{{ path('app_logout') }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Salir</a>                 
+                    </div>
+                {% else %}
+                    <div id="header_buttons">
+                        <a href="{{ path('app_login') }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Iniciar Sesion</a>         
+                        <a href="{{ path('registro') }}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Registrarse</a>         
+                    </div>
+                {% endif %}
             </div>
             
         
@@ -37,9 +43,13 @@
                 <li><a href="{{ path('index') }}">Inicio</a></li>
                 <li><a href="{{ path('indexCategoria') }}">Categorias</a></li>
                 <li><a href="{{ path("eventosActivos") }}">Eventos activos</a></li>
-                <li><a href="{{ path("evento") }}">Admin Eventos</a></li>
-                <li><a href="{{ path('adminCategoria') }}">Admin</a> </li>
-                <li><a href="{{ path('user') }}">Panel de Usuario</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="{{ path("evento") }}">Admin Eventos</a></li>
+                    <li><a href="{{ path('adminCategoria') }}">Admin</a> </li>
+                {% endif %}
+                {% if app.user %}
+                    <li><a href="{{ path('user') }}">Panel de Usuario</a></li>
+                {% endif %}
             </ul>
         </nav>
     </div>

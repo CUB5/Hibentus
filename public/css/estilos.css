@@ -67,6 +67,8 @@ td a{
 
 #fechasEvento{
     margin-top:8px;
+    margin-bottom: 30px;
+    float:left;
 }
 
 #eventoBoton{
@@ -80,6 +82,7 @@ td a{
 #eventoIndex{
     border-bottom: 1px dotted black;
     margin:15px;
+    padding-bottom:10px;
 }
 
 #eventoIndex a{
@@ -90,6 +93,36 @@ td a{
 #eventoIndex a:hover{
     color:darkblue;
 }
+
+#organizador, #fechaCreacion{
+    font-style: italic;
+}
+
+#eventoParticipantes{
+    float:left;
+}
+
+#primeraLinea{
+    display: flex;
+    width:100%;
+    flex-direction: row;
+    justify-content:space-evenly;
+}
+
+#segundaLinea{
+    display: flex;
+    width:80%;
+    flex-direction: row;
+    justify-content:space-evenly;
+    position: relative;
+}
+
+#eventoCatDesc{
+    padding-right: 10%;
+    width:80%;
+}
+
+
 
 #user_panel {margin-top: 30px; margin-left: 100px}
 #user_data p {display: block;}

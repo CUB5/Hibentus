@@ -65,6 +65,11 @@ class Evento
      */
     private $participantes;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imagen;
+
     public function __construct()
     {
         $this->comentarios = new ArrayCollection();
@@ -216,6 +221,18 @@ class Evento
                 $participante->setIdEvento(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImagen(): ?string
+    {
+        return $this->imagen;
+    }
+
+    public function setImagen(?string $imagen): self
+    {
+        $this->imagen = $imagen;
 
         return $this;
     }

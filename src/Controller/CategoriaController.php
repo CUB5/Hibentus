@@ -15,7 +15,7 @@ Use App\Entity\User;
 use App\Form\Type\CategoriaTipoType;
 use App\Form\Type\CategoriaType;
 use App\Form\Type\CategoriaCreateType;
-
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class CategoriaController extends AbstractController {
 
@@ -85,9 +85,24 @@ class CategoriaController extends AbstractController {
         $form=$this->createForm(CategoriaCreateType::class, $categoria);
         $form->handleRequest($request);
         $formVista=$form->createView();
+        $imagen=$form->get('imagen')->getData();
         if($form->isSubmitted()&&$form->isValid()){
             //$categoria=$form->getData();
-
+            if($imagen){
+                $nuevoNombre="cat";
+                $newFileName=$nuevoNombre."-".uniqid().".".$imagen->guessExtension();
+                $path="imgs/imgCat";
+                $pathImagen=$path."/".$newFileName;
+                try{
+                    $imagen->move($path,$newFileName);
+                }catch(FileException $e){}
+                if($pathImagen!=null&&$pathImagen!=""){
+                    if($categoria->getImagen()!=""){
+                        \unlink($categoria->getImagen());
+                    }
+                    $categoria->setImagen($pathImagen);
+                }
+            }
             $categoria->setNombre($form["categoria"]->getData());
             $categoria->setComentario($form["text"]->getData());
 
@@ -111,12 +126,25 @@ class CategoriaController extends AbstractController {
         $formVista=$form->createView();
 
         if($form->isSubmitted()&&$form->isValid()){
+            $imagen=$form->get('imagen')->getData();
             $categoria=$form->getData();
-
-            //$categoria->setNombre($form["categoria"]->getData());
-            //$categoria->setComentario($form["text"]->getData());
-
-
+            if($imagen){
+                $nuevoNombre="cat";
+                $newFileName=$nuevoNombre."-".uniqid().".".$imagen->guessExtension();
+                $path="imgs/imgCat";
+                $pathImagen=$path."/".$newFileName;
+                try{
+                    $imagen->move($path,$newFileName);
+                }catch(FileException $e){}
+                if($pathImagen!=null&&$pathImagen!=""){
+                    if($categoria->getImagen()!=""){
+                        \unlink($categoria->getImagen());
+                    }
+                    $categoria->setImagen($pathImagen);
+                }
+            }
+            $categoria->setNombre($form["categoria"]->getData());
+            $categoria->setComentario($form["text"]->getData());
             $this->getDoctrine()->getManager()->persist($categoria);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash("succes", "Categoría creada correctamente");

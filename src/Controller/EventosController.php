@@ -15,6 +15,7 @@ use App\Form\Type\EventoType;
 use App\Repository\ComentarioRepository;
 use App\Repository\UserRepository;
 use DateTime;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class EventosController extends AbstractController {
 
@@ -65,7 +66,23 @@ class EventosController extends AbstractController {
         $form->handleRequest($request);
         $formVista=$form->createView();
         if($form->isSubmitted()&&$form->isValid()){
+            $imagen=$form->get('imagen')->getData();
             $evento=$form->getData();
+            if($imagen){
+                $nuevoNombre="evento";
+                $newFileName=$nuevoNombre.'-'.uniqid().'.'.$imagen->guessExtension();
+                $path="imgs/imgEvento";
+                $pathImagen=$path."/".$newFileName;
+                try{
+                    $imagen->move($path, $newFileName);
+                }catch(FileException $e){}
+                if($pathImagen!=null&&$pathImagen!=""){
+                    if($evento->getImagen()!=""){
+                        \unlink($evento->getImagen());
+                    }
+                    $evento->setImagen($pathImagen);
+                }
+            }
             $this->getDoctrine()->getManager()->persist($evento);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash("succes", "Evento editado correctamente");
@@ -83,12 +100,28 @@ class EventosController extends AbstractController {
         $form->handleRequest($request);
         $formVista=$form->createView();
         if($form->isSubmitted()&&$form->isValid()){
+            $imagen=$form->get('imagen')->getData();
             $evento=$form->getData();
+            if($imagen){
+                $nuevoNombre="evento";
+                $newFileName=$nuevoNombre.'-'.uniqid().'.'.$imagen->guessExtension();
+                $path="imgs/imgEvento";
+                $pathImagen=$path."/".$newFileName;
+                try{
+                    $imagen->move($path, $newFileName);
+                }catch(FileException $e){}
+                if($pathImagen!=null&&$pathImagen!=""){
+                    if($evento->getImagen()!=""){
+                        \unlink($evento->getImagen());
+                    }
+                    $evento->setImagen($pathImagen);
+                }
+            }
             $fechaCreacion=new \DateTime();
             $evento->setFechaCreacion($fechaCreacion);
             $this->getDoctrine()->getManager()->persist($evento);
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash("succes", "Evento creado correctamente");
+            $this->addFlash("succes", "Evento editado correctamente");
             return $this->redirectToRoute("evento");
         }
         return $this->render("evento/edit.html.twig", [
