@@ -70,4 +70,13 @@ VISTAS 5 horas
         crud de propio usuarop
         crud de comentario
     vista evento
+
+EVENTOS ACTIVOS
+
+IMÁGENES DE EVENTOS
+
+ESTILOS (footer)
     
+PAGINADO
+
+ROLES DE USUARIOS
