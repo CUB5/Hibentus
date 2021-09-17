@@ -21,9 +21,9 @@
                     </div>
                     <div id="imagenIndex">
                         {% if evento.imagen %}
-                            <img src="{{ asset(evento.imagen)}}">
+                            <img id="imagenIndex" src="{{ asset(evento.imagen)}}">
                         {% else %}
-                            <img src="{{ asset(evento.idCategoria.imagen) }}">
+                            <img id="imagenIndex" src="{{ asset(evento.idCategoria.imagen) }}">
                         {% endif %}
                     </div>
                 </div>
