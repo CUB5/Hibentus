@@ -22,7 +22,7 @@
                         {% if evento.imagen %}
                             <img src="{{ asset(evento.imagen)}}">
                         {% else %}
-                            <img src="{{ asset('imgs/imgCat/cat' ~ evento.idCategoria.id ~ '.png') }}">
+                            <img src="{{ asset(evento.idCategoria.imagen) }}">
                         {% endif %}
                     </div>
                 </div>

@@ -80,3 +80,8 @@ ESTILOS (footer)
 PAGINADO
 
 ROLES DE USUARIOS
+
+Detalles ESTILOS
+    paleta de colores
+
+Imágenes categorias
