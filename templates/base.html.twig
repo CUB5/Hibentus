@@ -24,12 +24,12 @@
         <div id="wrapper" class="wrap_cnt">
             <main class="content">
                 {% for flash_message in app.session.flashbag.get('danger') %}
-                    <div id="flash-notice">
+                    <div class="alert alert-danger">
                         {{ flash_message }}
                     </div>
                 {% endfor %}
                 {% for flash_message in app.session.flashbag.get('success') %}
-                    <div id="flash-success">
+                    <div class="alert alert-success">
                         {{ flash_message }}
                     </div>
                 {% endfor %}

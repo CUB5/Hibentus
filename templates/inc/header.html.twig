@@ -3,12 +3,16 @@
     <div id="header" class="wrap_cnt">
 
             <div id="header_left">
-              <h1>HIBENTUS</h1>
-              <h3>Bienvendio a tu pagina de eventos</h3>
+                <div id="header_left_logo">
+                    <img id="header_img" src="{{ asset('images/logoHiberus.png') }}"/>
+                </div>
+                <div>
+                    <h1>HIBENTUS</h1>
+                    <h3>Bienvendio a tu pagina de eventos</h3>
+                </div>
             </div>
             
-            <div id="header_right">
-                <h1>¡Bienvenido!</h1>
+            <div id="header_right">                
                {#{{ render(controller('App\\Controller\\SecurityController::login')) }}#}
                 <!--<form method="post" action="">
                     <label for="username"></label>
@@ -23,10 +27,15 @@
     
                 </form>--> 
                 {% if app.user %}
-                    <div id="header_buttons">
-                        <a href="{{ path('app_logout') }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Salir</a>                 
+                    <h1>¡Bienvenido!</h1>
+                    <div id="header_buttons_login">
+                        <div id="inline">
+                            {{ app.user.username }}<p> --> </p>
+                            <a href="{{ path('app_logout') }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">  Salir  </a>                 
+                        </div>
                     </div>
                 {% else %}
+                    <h1>¡Inicia Sesion!</h1>
                     <div id="header_buttons">
                         <a href="{{ path('app_login') }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Iniciar Sesion</a>         
                         <a href="{{ path('registro') }}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Registrarse</a>         
