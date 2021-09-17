@@ -15,10 +15,19 @@
         {% endblock %}
     </head>
     <body>
+
+        
+
+
         {% include "inc/header.html.twig" %}
 
         <div id="wrapper" class="wrap_cnt">
             <main class="content">
+                {% for flash_message in app.session.flashbag.get('danger') %}
+                    <div class="flash-notice">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
                 {% block body %}{% endblock %}
             </main>
             <div style="clear:both"></div>
