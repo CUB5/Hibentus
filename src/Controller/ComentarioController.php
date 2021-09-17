@@ -8,9 +8,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Repository\ComentarioRepository;
+use App\Repository\EventoRepository;
+use App\Repository\UserRepository;
 Use App\Entity\Comentario;
 use App\Form\Type\ComentarioType;
 
+/**
+ * @Route("/profile", name="profile")
+ */
 class ComentarioController extends AbstractController {
 
     /**
@@ -47,19 +52,23 @@ class ComentarioController extends AbstractController {
     }
 
     /**
-     * @Route("/admin/addComentario", name="addComentario")
+     * @Route("/admin/addComentario/{idEvento}/{idUsu}", name="addComentario")
      */
-    public function addComentario(Request $request):Response{
+    public function addComentario($idEvento, $idUsu, EventoRepository $eventoRepo, UserRepository $userRepo ,Request $request):Response{
         $comentario=new Comentario();
         $form=$this->createForm(ComentarioType::class, $comentario);
         $form->handleRequest($request);
         $formVista=$form->createView();
         if($form->isSubmitted()&&$form->isValid()){
             $comentario=$form->getData();
+            $evento=$eventoRepo->find($idEvento);
+            $user=$userRepo->find($idUsu);
+            $comentario->setIdEvento($evento);
+            $comentario->setIdUser($user);
             $this->getDoctrine()->getManager()->persist($comentario);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash("succes", "Comentario creado correctamente");
-            return $this->redirectToRoute("comentario");
+            return $this->redirectToRoute("index");
         }
         return $this->render("comentario/edit.html.twig", [
             "form"=>$formVista

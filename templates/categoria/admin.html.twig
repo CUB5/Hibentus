@@ -51,11 +51,11 @@
                 <td>{{ key.email }}</td>
                 <td>{{ key.roles|join(', ') }}</td>
                 <td>
-                    <a href="{{ path('editUser', {'param': 1, 'id': key.id})}}">Nombre de Usuario</a>
-                    <a href="{{ path('editUser', {'param': 2, 'id': key.id})}}">Username</a>
-                    <a href="{{ path('editUser', {'param': 3, 'id': key.id})}}">Email</a>
-                    <a href="{{ path('editUserRole', {'id': key.id})}}">Rol</a>
-                    <a href="{{ path('deleteUser', {'id': key.id}) }}">Eliminar</a>
+                    <a href="{{ path('profileeditUser', {'param': 1, 'id': key.id})}}">Nombre de Usuario</a>
+                    <a href="{{ path('profileeditUser', {'param': 2, 'id': key.id})}}">Username</a>
+                    <a href="{{ path('profileeditUser', {'param': 3, 'id': key.id})}}">Email</a>
+                    <a href="{{ path('profileeditUserRole', {'id': key.id})}}">Rol</a>
+                    <a href="{{ path('profiledeleteUser', {'id': key.id}) }}">Eliminar</a>
                 </td>
             </tr>
             {% endfor %}

@@ -3,7 +3,32 @@
 {% block body %}
 
     {% for evento in lstEventos %}
-        <h1>{{ evento.nombre }}</h1>
+        <div id="eventoIndex">
+            <a href="{{ path("vistaEvento", {id: evento.id}) }}">
+                <section id="primeraLinea">
+                    <div>
+                        <h1>{{ evento.nombre }}</h1>
+                    </div>
+                    <div id="fechasEvento">
+                        Fecha inicio: {{evento.fechaInicio|date("d/m/Y")}}<br>
+                        Fecha fin: {{evento.fechaFin|date("d/m/Y")}}
+                    </div>
+                </section>
+                <div id="segundaLinea">
+                    <div id="eventoCatDesc">
+                        <h5>{{ evento.idCategoria.nombre }}</h5>
+                        {{ evento.descripcion }}
+                    </div>
+                    <div id="imagenIndex">
+                        {% if evento.imagen %}
+                            <img src="{{ asset(evento.imagen)}}">
+                        {% else %}
+                            <img src="{{ asset(evento.idCategoria.imagen) }}">
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+        </div>
     {% endfor %}
 
 {% endblock %}

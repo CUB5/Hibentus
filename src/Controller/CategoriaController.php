@@ -52,6 +52,7 @@ class CategoriaController extends AbstractController {
         $eventos=$eventoRepo->findBy(["idCategoria"=>$id]);
         if(empty($eventos)){
             $this->addFlash("danger", "No se han encontrado eventos");
+            return $this->redirectToRoute("indexCategoria");
         }else{
             return $this->render("categoria/vistaEventos.html.twig", [
                 'lstEventos'=>$eventos

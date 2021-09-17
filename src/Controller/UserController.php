@@ -14,7 +14,9 @@ use App\Form\Type\EditFieldType;
 use App\Form\Type\RoleChooseType;
 
 
-
+/**
+ * @Route("/profile", name="profile")
+ */
 class UserController extends AbstractController {
 
     /**

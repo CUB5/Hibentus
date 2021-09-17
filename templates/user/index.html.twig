@@ -3,37 +3,60 @@
 {% block body %}
 
 <div id="user_panel">
-    <div>
-        <img id="user_img" src="{{ asset('images/defaults/profile_default.png') }}"/>
-
-    </div>
-    <div id="user_data">
-        <div id="inline">
-            <p> Nombre de Usuario: </p> {{ app.user.username }}
-            <a href="{{ path('editUser', {'param': 1, 'id': app.user.id})}}">Editar</a>
+    <div class="row">
+        <div class="col-lg-3">
+            <div>
+                <img id="user_img" src="{{ asset('images/defaults/profile_default.png') }}"/>
+            </div>
+            <div id="user_data">
+                <div id="inline">
+                    <p> Nombre de Usuario: </p> {{ app.user.username }}
+                    <a href="{{ path('profileeditUser', {'param': 1, 'id': app.user.id})}}">Editar</a>
+                </div>
+                <div id="inline">
+                    <p> Cambiar Contraseña:</p>
+                    <a href="">Cambiar</a>
+                </div>
+                <div id="inline">
+                    <p> Nombre: </p> {{ app.user.nombre }}
+                    <a href="{{ path('profileeditUser', {'param': 2, 'id': app.user.id})}}">Editar</a>
+                </div>
+                <div id="inline">
+                    <p> ROL: </p> {{ app.user.roles|join(', ') }}
+                </div>
+                <div id="inline">
+                    <P> email: </P> {{ app.user.email}}
+                    <a href="{{ path('profileeditUser', {'param': 3, 'id': app.user.id})}}">Editar</a>
+                </div>
+            </div>   
+            <br>
+            <div>
+                <a href="{{ path('index')}}" class="btn btn-primary btn-sm active" role="button">Volver</a>
+            </div>
         </div>
-        <div id="inline">
-            <p> Cambiar Contraseña:</p>
-            <a href="">Cambiar</a>
+        <div class="col-lg-5" id="comentariosUser">
+            <h1>Comentarios</h1>
+            {% for com in app.user.comentarios %}
+                <b>{{ com.idEvento.nombre }}</b>: {{ com.comentario }}<br>
+            {% endfor %}
         </div>
-        <div id="inline">
-            <p> Nombre: </p> {{ app.user.nombre }}
-            <a href="{{ path('editUser', {'param': 2, 'id': app.user.id})}}">Editar</a>
+        <div class="col-lg-3" id="eventosUser">
+            <h1>Eventos</h1>
+            <table>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                </tr>
+            {% for part in app.user.participantes %}
+                <tr>
+                    <td>{{ part.idEvento.nombre }}</td>
+                    <td>{{ part.idEvento.fechaInicio|date("d/m/Y") }}</td>
+                    <td>{{ part.idEvento.fechaFin|date("d/m/Y") }}</td>
+                </tr>
+            {% endfor %}
+            </table>
         </div>
-        <div id="inline">
-            <p> ROL: </p> {{ app.user.roles|join(', ') }}
-        </div>
-        <div id="inline">
-            <P> email: </P> {{ app.user.email}}
-            <a href="{{ path('editUser', {'param': 3, 'id': app.user.id})}}">Editar</a>
-
-        </div>
-        
-    <div>
-        <a href="{{ path('index')}}" class="btn btn-primary btn-sm active" role="button">Volver</a>
-    </div>
-        
-        
     </div>
 </div>
     
