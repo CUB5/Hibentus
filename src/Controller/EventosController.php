@@ -85,7 +85,7 @@ class EventosController extends AbstractController {
             }
             $this->getDoctrine()->getManager()->persist($evento);
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash("succes", "Evento editado correctamente");
+            $this->addFlash("success", "Evento editado correctamente");
             return $this->redirectToRoute("evento");
         }
         return $this->render('evento/edit.html.twig', ["form"=>$formVista]);
@@ -121,7 +121,7 @@ class EventosController extends AbstractController {
             $evento->setFechaCreacion($fechaCreacion);
             $this->getDoctrine()->getManager()->persist($evento);
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash("succes", "Evento editado correctamente");
+            $this->addFlash("success", "Evento editado correctamente");
             return $this->redirectToRoute("evento");
         }
         return $this->render("evento/edit.html.twig", [

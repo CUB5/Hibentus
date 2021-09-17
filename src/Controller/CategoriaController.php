@@ -109,7 +109,7 @@ class CategoriaController extends AbstractController {
 
             $this->getDoctrine()->getManager()->persist($categoria);
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash("succes", "Categoría editada correctamente");
+            $this->addFlash("success", "Categoría editada correctamente");
             return $this->redirectToRoute("adminCategoria");
         }
         return $this->render('categoria/edit.html.twig', [
@@ -148,7 +148,7 @@ class CategoriaController extends AbstractController {
             $categoria->setComentario($form["text"]->getData());
             $this->getDoctrine()->getManager()->persist($categoria);
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash("succes", "Categoría creada correctamente");
+            $this->addFlash("success", "Categoría creada correctamente");
 
             return $this->redirectToRoute("adminCategoria");
         }

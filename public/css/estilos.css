@@ -1,7 +1,7 @@
 
 
 .wrap_header_cnt { position: relative; max-width:1200px; margin: 0 auto; }
-#cntHeader { background-color: green; }
+#cntHeader { background-color: #D9A74A }
 #header { padding-left: 55px; padding-top: 15px;padding-bottom: -5px;margin-bottom: -15px;}
 #header > div {float: left; width: 50%; min-height: 1px;}
 #header_left {margin-top: 15px;}
@@ -15,15 +15,18 @@
 
 #menu li { display: inline-block; }
 #menu li a { display: block; padding: 10px; text-decoration: none; color:#000; }
-#menu li:hover a { background-color: #333; color:#fafafa; }
+#menu li:hover a { background-color: #644814; color:white; }
 
 
 
 .wrap_cnt { position: relative; overflow: hidden; max-width:1200px; margin: 0 auto; }
 
-#wrapper {padding-left: 25px; margin-bottom: 70px; background-color: white;}
-#content { float: left; padding: 10; width: 80%; background-color: #fff;  }
+#wrapper {padding-left: 25px; margin-bottom: 70px; }
+#content { float: left; padding: 10; width: 80%;   }
 
+body{
+    background-color: #f5f5fa;
+}
 
 
 
@@ -122,7 +125,10 @@ td a{
     width:80%;
 }
 
-#imagenIndex{ width:275px}
+#imagenIndex{
+    width:275px;
+    height:183px;
+}
 
 
 
@@ -131,4 +137,14 @@ td a{
 #inline p {display: inline; font-weight: bold;}
 #user_img { width: 100px; margin-bottom: 30px;}
 
-#flash-notice {color:red}
+#flash-notice{
+    color:red;
+}
+
+#flash-success{
+    color:green;
+}
+
+#comentariosUser{
+    margin-top:30px;
+}
