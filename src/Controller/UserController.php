@@ -114,7 +114,7 @@ class UserController extends AbstractController {
 
             $this->getDoctrine()->getManager()->persist($user);
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash("succes", "Categoría editada correctamente");
+            $this->addFlash("success", "Categoría editada correctamente");
 
             return $this->redirectToRoute("adminCategoria");
         }

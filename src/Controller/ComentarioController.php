@@ -45,7 +45,7 @@ class ComentarioController extends AbstractController {
             $comentario=$form->getData();
             $this->getDoctrine()->getManager()->persist($comentario);
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash("succes", "Comentario editado correctamente");
+            $this->addFlash("success", "Comentario editado correctamente");
             return $this->redirectToRoute("comentario");
         }
         return $this->render('comentario/edit.html.twig', ["form"=>$formVista]);
@@ -67,7 +67,7 @@ class ComentarioController extends AbstractController {
             $comentario->setIdUser($user);
             $this->getDoctrine()->getManager()->persist($comentario);
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash("succes", "Comentario creado correctamente");
+            $this->addFlash("success", "Comentario creado correctamente");
             return $this->redirectToRoute("index");
         }
         return $this->render("comentario/edit.html.twig", [

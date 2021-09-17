@@ -55,4 +55,19 @@ class ParticipanteController extends AbstractController
 
 
     }
+
+    /**
+     * @Route("participante/borrarse/{id}", name="borrarse")
+     */
+    public function borrarse($id, ParticipanteRepository $partRepo):Response{
+        $participante=$partRepo->find($id);
+        if($participante==null){
+            $this->addFlash("danger", "El evento no existe");
+        }else{
+            $this->getDoctrine()->getManager()->remove($participante);
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash("success", "Te has borrado del evento");
+        }
+        return $this->redirectToRoute("profileuser");
+    }
 }

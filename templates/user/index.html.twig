@@ -30,15 +30,8 @@
                 </div>
             </div>   
             <br>
-            <div>
-                <a href="{{ path('index')}}" class="btn btn-primary btn-sm active" role="button">Volver</a>
-            </div>
         </div>
-        <div class="col-lg-5" id="comentariosUser">
-            <h1>Comentarios</h1>
-            {% for com in app.user.comentarios %}
-                <b>{{ com.idEvento.nombre }}</b>: {{ com.comentario }}<br>
-            {% endfor %}
+        <div class="col-lg-1">
         </div>
         <div class="col-lg-3" id="eventosUser">
             <h1>Eventos</h1>
@@ -47,16 +40,24 @@
                     <th>Nombre</th>
                     <th>Inicio</th>
                     <th>Fin</th>
+                    <th>Borrar</th>
                 </tr>
             {% for part in app.user.participantes %}
                 <tr>
                     <td>{{ part.idEvento.nombre }}</td>
                     <td>{{ part.idEvento.fechaInicio|date("d/m/Y") }}</td>
                     <td>{{ part.idEvento.fechaFin|date("d/m/Y") }}</td>
+                    <td> <a href="{{ path('borrarse', {id:part.id}) }}" class="btn btn-primary btn-sm active" role="button">Borrarse</a></td>
                 </tr>
             {% endfor %}
             </table>
         </div>
+    </div>
+    <div class="col-lg-8" id="comentariosUser">
+        <h1>Comentarios</h1>
+        {% for com in app.user.comentarios %}
+            <b>{{ com.idEvento.nombre }}</b>: {{ com.comentario }}<br>
+        {% endfor %}
     </div>
 </div>
     
