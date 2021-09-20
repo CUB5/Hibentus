@@ -82,14 +82,12 @@ class UserController extends AbstractController {
         $formVista=$form->createView();
         if($form->isSubmitted()&&$form->isValid()){
             $user=$form->getData();
-
             $pass = $form->get('password')->getData();
-
             $hashedPass = $hasher->hashPassword($user, $pass);
-
             $user->setPassword($hashedPass);
-            
-
+            $rol=$form->get('roles')->getData();
+            $roles=explode(",", $rol);
+            $user->setRoles($roles);
             $this->getDoctrine()->getManager()->persist($user);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash("success", "Usuario creado correctamente");

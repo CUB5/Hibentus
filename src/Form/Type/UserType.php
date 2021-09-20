@@ -30,7 +30,6 @@ class UserType extends AbstractType{
                 ]
             )
             ->add('password', RepeatedType::class, [
-                
                 "type"=>PasswordType::class,
                 "first_options"=>["label"=>"Contraseña"],
                 "second_options"=>["label"=>"Repite contraseña"] 
