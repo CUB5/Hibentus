@@ -20,16 +20,14 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class EventosController extends AbstractController {
 
     /**
-     * @Route("/admin/evento", name="evento")
+     * @Route("/admin/evento/{page<\d+>}", name="evento")
      */
-    public function indexEvento(EventoRepository $eventoRepo, UserRepository $userRepo, CategoriaRepository $catRepo):Response{
-        $listaEvento=$eventoRepo->findAll();
-        $listaUser=$userRepo->findAll();
-        $listaCategorias=$catRepo->findAll();
+    public function indexEvento($page=1,EventoRepository $eventoRepo):Response{
+        $listaEvento=$eventoRepo->findAllPaginado($page);
         return $this->render("evento/index.html.twig", [
-            'listaEventos'=>$listaEvento,
-            'listaCat'=>$listaCategorias,
-            'listaUser'=>$listaUser
+            'listaEventos'=>$listaEvento['res'],
+            'page'=>$page,
+            'nMaxPages'=>$listaEvento["nMaxPages"]
         ]);
     }
 
@@ -156,9 +154,14 @@ class EventosController extends AbstractController {
             ->setFirstResult($limit*($page-1))
             ->setMaxResults($limit)
             ->getQuery();
+        $consultaEventosActivos=$eventoRepo->createQueryBuilder('e')
+            ->where(":fechaActual BETWEEN e.fechaInicio AND  e.fechaFin")
+            ->setParameter('fechaActual', $fechaActual)
+            ->getQuery();  
         $eventosActivos=$consultaActivos->getResult();
-        $numEventos=count($eventosActivos);
-        $maxPags=ceil($numEventos/10);
+        $todosEventosActivos=$consultaEventosActivos->getResult();
+        $numEventos=count($todosEventosActivos);
+        $maxPags=ceil($numEventos/$limit);
         return $this->render("evento/activos.html.twig", [
             "eventosActivos"=>$eventosActivos,
             "nMaxPages"=>$maxPags,

@@ -23,14 +23,14 @@
             <td>{{usu.nombre}}</td>
             <td>{{usu.email}}
             <td>
-                <a class="btn btn-primary btn-sm active" role="button" aria-pressed="true" href="{{ path('profileeditUser', {'param': 1, 'id': usu.id})}}">Editar nombre de usuario</a>
-                <a class="btn btn-primary btn-sm active" role="button" aria-pressed="true" href="{{ path('profileeditUserRole', {'id': usu.id})}}">Editar rol</a>
-                <a class="btn btn-primary btn-sm active" role="button" aria-pressed="true" href="{{ path('profileeditUser', {'param': 2, 'id': usu.id})}}">Editar nombre</a>
-                <a class="btn btn-primary btn-sm active" role="button" aria-pressed="true" href="{{ path('profileeditUser', {'param': 3, 'id': usu.id})}}">Editar correo</a>
-                <a href="{{ path('profiledeleteUser', {id: usu.id}) }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Eliminar</a>
+                <a class="btn btn-primary btn-sm active" role="button" aria-pressed="true" href="{{ path('profile_editUser', {'param': 1, 'id': usu.id})}}">Editar nombre de usuario</a>
+                <a class="btn btn-primary btn-sm active" role="button" aria-pressed="true" href="{{ path('profile_editUserRole', {'id': usu.id})}}">Editar rol</a>
+                <a class="btn btn-primary btn-sm active" role="button" aria-pressed="true" href="{{ path('profile_editUser', {'param': 2, 'id': usu.id})}}">Editar nombre</a>
+                <a class="btn btn-primary btn-sm active" role="button" aria-pressed="true" href="{{ path('profile_editUser', {'param': 3, 'id': usu.id})}}">Editar correo</a>
+                <a href="{{ path('profile_deleteUser', {id: usu.id}) }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Eliminar</a>
             </td>
         </tr>
     {% endfor %}
     </table>
-    {% include 'inc/paginador.tpl.twig' with {routerName: 'listaUsuarios'} %}
+    {% include 'inc/paginador.tpl.twig' with {routerName: 'profilelistaUsuarios'} %}
 {% endblock %}

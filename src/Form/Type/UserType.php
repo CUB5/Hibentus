@@ -29,11 +29,10 @@ class UserType extends AbstractType{
                 ],
                 "mapped"=>false]
             )
-            ->add('plainPass', RepeatedType::class, [
-                "mapped"=>false,
+            ->add('password', RepeatedType::class, [
                 "type"=>PasswordType::class,
-                "first_option"=>["label"=>"Contraseña"],
-                "second_option"=>["label"=>"Repite contraseña"] 
+                "first_options"=>["label"=>"Contraseña"],
+                "second_options"=>["label"=>"Repite contraseña"] 
             ])
             ->add("nombre", TextType::class)
             ->add("email", EmailType::class)

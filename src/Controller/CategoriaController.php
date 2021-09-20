@@ -46,16 +46,21 @@ class CategoriaController extends AbstractController {
     }
 
     /**
-     * @Route("/categoria/{id}", name="categoria")
+     * @Route("/categoria/{id}/{page<\d+>}", name="categoria")
      */
-    public function eventosCategoria($id, EventoRepository $eventoRepo){
+    public function eventosCategoria($page=1, $id, EventoRepository $eventoRepo){
+        $limit=10;
         $eventos=$eventoRepo->findBy(["idCategoria"=>$id]);
+        $numEventos=count($eventos);
+        $maxPags=ceil($numEventos/$limit);
         if(empty($eventos)){
             $this->addFlash("danger", "No se han encontrado eventos");
             return $this->redirectToRoute("indexCategoria");
         }else{
             return $this->render("categoria/vistaEventos.html.twig", [
-                'lstEventos'=>$eventos
+                'lstEventos'=>$eventos,
+                "nMaxPages"=>$maxPags,
+                'page' => $page
             ]);
         }
     }
