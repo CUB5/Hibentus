@@ -21,7 +21,7 @@
 
         {% include "inc/header.html.twig" %}
 
-        <div id="wrapper" class="wrap_cnt">
+        <div id="wrapper">
             <main class="content">
                 {% for flash_message in app.session.flashbag.get('danger') %}
                     <div class="alert alert-danger">

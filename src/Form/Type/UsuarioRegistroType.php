@@ -20,7 +20,7 @@ class UsuarioRegistroType extends AbstractType{
             ->add("username", TextType::class)
             ->add("password", PasswordType::class)
             ->add("nombre", TextType::class)
-            ->add("email", TextType::class)
+            ->add("email", EmailType::class)
             ->add("btnEnviar", SubmitType::class, ["label"=>"Crear"]);
     }
 

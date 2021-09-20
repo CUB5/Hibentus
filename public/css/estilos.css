@@ -1,21 +1,21 @@
 
 
 .wrap_header_cnt { position: relative; max-width:1600px; margin: 0 auto; }
-#cntHeader { background-color: #D9A74A }
-#header { padding-left: 55px; padding-top: 15px; margin-bottom: -15px;}
-#header > div {float: left; width: 50%; min-height: 1px;}
-#header_left{}
+#cntHeader { background-color: #D9A74A}
+#header { padding-left: 55px; padding-top: 15px; margin-bottom: -15px; max-width:1600px;}
+#header > div {float: left; min-height: 1px;}
+#header_left{ width: 70%; }
 #header_left_logo{float:left; width: 115px;}
 #header_img { width: 100px; }
 #header_center { text-align: center; }
-#header_right { text-align: right; padding-right: 20px;}
+#header_right { text-align: right; width: 30%; padding-right: 20px;}
 #header_buttons_login { margin-top: 5px; padding-right: 13px;}
 #header_buttons { margin-top: 5px; padding-right: 23px;}
 
 
 #banner { font-size: large; }
 
-#cntNav {margin-top: 15px;}
+#cntNav {margin-top: 15px; }
 
 #menu li { display: inline-block; }
 #menu li a { display: block; padding: 10px; text-decoration: none; color:#000; }
@@ -25,7 +25,7 @@
 
 .wrap_cnt { position: relative; overflow: hidden; max-width:1600px; margin: 0 auto; }
 
-#wrapper {padding-left: 25px; margin-bottom: 70px; margin-right: 25px;}
+#wrapper {padding-left: 0px; margin-bottom: 70px; margin-right: 25px; max-width: 1600px; margin: 0 auto; overflow: hidden}
 #content { float: left; padding: 10; width: 80%; margin-left: 80px;}
 
 body{

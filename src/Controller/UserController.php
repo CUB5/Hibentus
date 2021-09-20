@@ -73,15 +73,23 @@ class UserController extends AbstractController {
     }
 
     /**
-     * @Route("/admin/addUser", name="addUser")
+     * @Route("/admin/addUser", name="_addUser")
      */
-    public function addUser(Request $request):Response{
+    public function addUser(Request $request, UserPasswordHasherInterface $hasher):Response{
         $user=new User();
         $form=$this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         $formVista=$form->createView();
         if($form->isSubmitted()&&$form->isValid()){
             $user=$form->getData();
+
+            $pass = $form->get('password')->getData();
+
+            $hashedPass = $hasher->hashPassword($user, $pass);
+
+            $user->setPassword($hashedPass);
+            
+
             $this->getDoctrine()->getManager()->persist($user);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash("success", "Usuario creado correctamente");

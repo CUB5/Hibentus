@@ -26,6 +26,7 @@ class EventoType extends AbstractType{
             ->add('fecha_inicio', DateTimeType::class)
             ->add('fecha_fin', DateTimeType::class)
             ->add('descripcion', TextareaType::class)
+            ->add('localizacion', TextType::class)
             ->add('imagen', FileType::class, [
                 'mapped'=>false,
                 'required'=>false,
