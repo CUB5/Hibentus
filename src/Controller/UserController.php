@@ -6,12 +6,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 
 use App\Repository\UserRepository;
 Use App\Entity\User;
 use App\Form\Type\UserType;
 use App\Form\Type\EditFieldType;
 use App\Form\Type\RoleChooseType;
+use App\Form\Type\ChangePasswordType;
 
 
 /**
@@ -20,14 +24,14 @@ use App\Form\Type\RoleChooseType;
 class UserController extends AbstractController {
 
     /**
-     * @Route("/user", name="user")
+     * @Route("/user", name="_user")
      */
     public function indexUser():Response{
         return $this->render("user/index.html.twig");
     }
 
     /**
-     * @Route("/admin/editUser/{param}/{id}", name="editUser")
+     * @Route("/admin/editUser/{param}/{id<\d+>}", name="_editUser")
      */
     public function editUser($id, $param, UserRepository $userRepo, Request $request): Response{
         $user=new User();
@@ -45,29 +49,25 @@ class UserController extends AbstractController {
 
                 $user->setUsername($data);
 
-                $this->getDoctrine()->getManager()->persist($user);
-                $this->getDoctrine()->getManager()->flush();
-                $this->addFlash("success", "Usuario editado correctamente");
             }
             if($param == 2){
                 $data = $form['input']->getData();
 
                 $user->setNombre($data);
 
-                $this->getDoctrine()->getManager()->persist($user);
-                $this->getDoctrine()->getManager()->flush();
-                $this->addFlash("success", "Usuario editado correctamente");
             }
             if($param == 3){
                 $data = $form['input']->getData();
 
                 $user->setEmail($data);
 
-                $this->getDoctrine()->getManager()->persist($user);
-                $this->getDoctrine()->getManager()->flush();
-                $this->addFlash("success", "Usuario editado correctamente");
             }
-            return $this->redirectToRoute("profileuser");
+
+            $this->getDoctrine()->getManager()->persist($user);
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash("success", "Usuario editado correctamente");
+
+            return $this->redirectToRoute("profile_user");
         }
         return $this->render('user/edit.html.twig', ["form"=>$formVista]);
     }
@@ -85,7 +85,7 @@ class UserController extends AbstractController {
             $this->getDoctrine()->getManager()->persist($user);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash("success", "Usuario creado correctamente");
-            return $this->redirectToRoute("user");
+            return $this->redirectToRoute("profile_user");
         }
         return $this->render("user/edit.html.twig", [
             "form"=>$formVista
@@ -93,7 +93,44 @@ class UserController extends AbstractController {
     }
 
     /**
-     * @Route("/admin/editUserRole/{id}", name="editUserRole")
+     * @Route("/admin/editPassword", name="_editPassword")
+     */
+    public function editPassword(Request $request, UserPasswordHasherInterface $hasher){
+
+        $user = $this->getUser();
+
+        if ($user == null) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        $form=$this->createForm(ChangePasswordType::class, $user);
+        $form->handleRequest($request);
+        $formVista=$form->createView();
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $pass = $form->get('password')->getData();
+
+            $hashedPass = $hasher->hashPassword($user, $pass);
+
+            $user->setPassword($hashedPass);
+            
+            $this->getDoctrine()->getManager()->persist($user);
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash("success", "Contraseña cambiada correctamente");
+            
+            return $this->redirectToRoute("profile_user");
+
+        }
+
+        return $this->render("user/edit.html.twig", [
+            "form"=>$formVista
+        ]);
+
+    }
+
+    /**
+     * @Route("/admin/editUserRole/{id}", name="_editUserRole")
      */
     public function editUserRole($id, UserRepository $userRepo, Request $request){
         $user = new User();
@@ -124,7 +161,7 @@ class UserController extends AbstractController {
     }
 
     /**
-     * @Route("/admin/deleteUser/{id}", name="deleteUser")
+     * @Route("/admin/deleteUser/{id}", name="_deleteUser")
      */
     public function deleteUser($id, UserRepository $userRepo):Response{
         $user=$userRepo->find($id);

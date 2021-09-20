@@ -11,22 +11,22 @@
             <div id="user_data">
                 <div id="inline">
                     <p> Nombre de Usuario: </p> {{ app.user.username }}
-                    <a href="{{ path('profileeditUser', {'param': 1, 'id': app.user.id})}}">Editar</a>
+                    <a href="{{ path('profile_editUser', {'param': 1, 'id': app.user.id})}}">Editar</a>
                 </div>
                 <div id="inline">
                     <p> Cambiar Contraseña:</p>
-                    <a href="">Cambiar</a>
+                    <a href="{{ path('profile_editPassword') }}">Cambiar</a>
                 </div>
                 <div id="inline">
                     <p> Nombre: </p> {{ app.user.nombre }}
-                    <a href="{{ path('profileeditUser', {'param': 2, 'id': app.user.id})}}">Editar</a>
+                    <a href="{{ path('profile_editUser', {'param': 2, 'id': app.user.id})}}">Editar</a>
                 </div>
                 <div id="inline">
                     <p> ROL: </p> {{ app.user.roles|join(', ') }}
                 </div>
                 <div id="inline">
                     <P> email: </P> {{ app.user.email}}
-                    <a href="{{ path('profileeditUser', {'param': 3, 'id': app.user.id})}}">Editar</a>
+                    <a href="{{ path('profile_editUser', {'param': 3, 'id': app.user.id})}}">Editar</a>
                 </div>
             </div>   
             <br>

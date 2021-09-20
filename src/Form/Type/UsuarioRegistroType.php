@@ -7,6 +7,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+
 
 use App\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -16,7 +18,7 @@ class UsuarioRegistroType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options){
         $builder    
             ->add("username", TextType::class)
-            ->add("password", TextType::class)
+            ->add("password", PasswordType::class)
             ->add("nombre", TextType::class)
             ->add("email", TextType::class)
             ->add("btnEnviar", SubmitType::class, ["label"=>"Crear"]);
