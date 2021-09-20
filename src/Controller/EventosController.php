@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class EventosController extends AbstractController {
 
     /**
-     * @Route("/evento", name="evento")
+     * @Route("/admin/evento", name="evento")
      */
     public function indexEvento(EventoRepository $eventoRepo, UserRepository $userRepo, CategoriaRepository $catRepo):Response{
         $listaEvento=$eventoRepo->findAll();
