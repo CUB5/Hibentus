@@ -26,15 +26,32 @@
 .wrap_cnt { position: relative; overflow: hidden; max-width:1600px; margin: 0 auto; }
 
 #wrapper {padding-left: 0px; margin-bottom: 70px; margin-right: 25px; max-width: 1600px; margin: 0 auto; overflow: hidden}
-#content { float: left; padding: 10; width: 80%; margin-left: 80px;}
+.content { float: left; padding: 10px; width: 80%; margin-left: 80px;}
 
 body{
     background-color: #f5f5fa;
 }
 
 
+#eventoIndex a{
+    text-decoration:none;
+    color:black;
+}
+#eventoIndex a:hover{
+    color:darkblue;
+}
+#headerEventoIndex{margin-bottom: 20px;}
+#contentEventoIndex{position: relative;}
+#leftEventoIndex{float:left; width: 20%;}
+#rightEventoIndex{float:left ; width: 80%; }
+#descripcionEventoIndex{float:left; width: 80%; border-right-width: 20px; border-right-style: solid; border-right-color:#f5f5fa;}
+#imageEventoIndex{float:left; width: 20%;}
 
-
+#imagenIndex{
+    width:275px;
+    height:183px;
+    margin-top: -20px;
+}
 
 
 
@@ -64,10 +81,6 @@ td a{
     margin-top:30px;
 }
 
-#imagenEvento{
-    margin-top:30px;
-}
-
 #eventoParticipantes li{
     list-style: none;
 }
@@ -86,20 +99,11 @@ td a{
     margin:10px;
 }
 
-#eventoIndex{
-    border-bottom: 1px dotted black;
-    margin:15px;
-    padding-bottom:10px;
-}
 
-#eventoIndex a{
-    text-decoration:none;
-    color:black;
-}
 
-#eventoIndex a:hover{
-    color:darkblue;
-}
+
+
+
 
 #organizador, #fechaCreacion{
     font-style: italic;
@@ -129,10 +133,7 @@ td a{
     width:80%;
 }
 
-#imagenIndex{
-    width:275px;
-    height:183px;
-}
+
 
 
 
