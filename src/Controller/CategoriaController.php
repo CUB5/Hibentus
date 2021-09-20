@@ -68,7 +68,7 @@ class CategoriaController extends AbstractController {
         $categorias=$catRepo->findAll();
         return $this->render('categoria/admin.html.twig', [
             'lstCat'=>$categorias,
-            'lstUsr'=>$user
+            'lstUsr'=>$user,
         ]);
     }
 

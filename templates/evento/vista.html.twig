@@ -4,12 +4,15 @@
     <div id="eventoVista">
         <div id="eventoInfo">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-5">
                     <h1 id="tituloEvento">{{evento.nombre}}</h1>
                 </div>
-                <div id="fechasEvento" class="col-lg-6">
+                <div id="fechasEvento" class="col-lg-3">
                     Fecha inicio: {{evento.fechaInicio|date("d/m/Y")}}<br>
                     Fecha fin: {{evento.fechaFin|date("d/m/Y")}}
+                </div>
+                <div id="localizacionEvento" class="col-lg-4">
+                    {{ evento.localizacion }}
                 </div>
             </div>
             <div id="eventoContenido">

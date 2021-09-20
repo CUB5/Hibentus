@@ -67,7 +67,7 @@ class UserController extends AbstractController {
                 $this->getDoctrine()->getManager()->flush();
                 $this->addFlash("success", "Usuario editado correctamente");
             }
-            return $this->redirectToRoute("user");
+            return $this->redirectToRoute("profileuser");
         }
         return $this->render('user/edit.html.twig', ["form"=>$formVista]);
     }
@@ -136,6 +136,18 @@ class UserController extends AbstractController {
             $this->addFlash("success", "Se ha eliminado el usuario");
         }
         return $this->redirectToRoute("adminCategoria");
+    }
+
+    /**
+     * @Route("/admin/listaUsuarios/{page<\d+>}", name="listaUsuarios")
+     */
+    public function listaUsuarios($page=1, UserRepository $userRepo):Response{
+        $usuarios=$userRepo->findAllPaginado($page);
+        return $this->render('user/listaUser.html.twig', [
+            "listaUsu"=>$usuarios["res"],
+            "page"=>$page,
+            "nMaxPages"=>$usuarios["nMaxPages"]
+        ]);
     }
 
 }

@@ -145,17 +145,24 @@ class EventosController extends AbstractController {
     }
 
     /**
-     * @Route("/eventosActivos", name="eventosActivos")
+     * @Route("/eventosActivos/{page<\d+>}", name="eventosActivos")
      */
-    public function eventosActivos(EventoRepository $eventoRepo):Response{
+    public function eventosActivos($page=1, EventoRepository $eventoRepo):Response{
+        $limit=10;
         $fechaActual=new \DateTime();
         $consultaActivos=$eventoRepo->createQueryBuilder('e')
             ->where(":fechaActual BETWEEN e.fechaInicio AND  e.fechaFin")
             ->setParameter('fechaActual', $fechaActual)
+            ->setFirstResult($limit*($page-1))
+            ->setMaxResults($limit)
             ->getQuery();
         $eventosActivos=$consultaActivos->getResult();
+        $numEventos=count($eventosActivos);
+        $maxPags=ceil($numEventos/10);
         return $this->render("evento/activos.html.twig", [
-            "eventosActivos"=>$eventosActivos
+            "eventosActivos"=>$eventosActivos,
+            "nMaxPages"=>$maxPags,
+            'page' => $page
         ]);
     }
 

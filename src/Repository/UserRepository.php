@@ -8,6 +8,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -35,6 +36,33 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->persist($user);
         $this->_em->flush();
     }
+
+    public function paginate($sql, $page = 1, $limit = 10){
+        $paginador = new Paginator($sql);
+
+        $paginador->getQuery()
+                ->setFirstResult($limit * ($page - 1))
+                ->setMaxResults($limit);
+
+        return $paginador;
+    }
+
+    public function findAllPaginado($page=1, $limit = 10){
+        $qb = $this->createQueryBuilder('c');
+
+        $query = $qb->getQuery();
+
+        $paginador = $this->paginate($query, $page, $limit);
+        $nMaxPages = ceil($paginador->count()/$limit);
+
+        return [
+            "paginador" => $paginador,
+            "nMaxPages" => $nMaxPages,
+            "res" => $query->getResult()
+        ];
+
+    }
+
 
     // /**
     //  * @return User[] Returns an array of User objects

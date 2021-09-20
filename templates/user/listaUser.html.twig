@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Lista usuarios
+{% endblock title %}
+
+{% block body %}
+     <a href="{{ path('profileaddUser') }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Añadir</a>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre usuario</th>
+            <th>Roles</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Acciones</th>
+        </tr>
+    {% for usu in listaUsu %}
+        <tr>
+            <td>{{usu.id}}</td>
+            <td>{{usu.username}}</td>
+            <td>{{usu.roles|join(", ")}}</td>
+            <td>{{usu.nombre}}</td>
+            <td>{{usu.email}}
+            <td>
+                <a class="btn btn-primary btn-sm active" role="button" aria-pressed="true" href="{{ path('profileeditUser', {'param': 1, 'id': usu.id})}}">Editar nombre de usuario</a>
+                <a class="btn btn-primary btn-sm active" role="button" aria-pressed="true" href="{{ path('profileeditUserRole', {'id': usu.id})}}">Editar rol</a>
+                <a class="btn btn-primary btn-sm active" role="button" aria-pressed="true" href="{{ path('profileeditUser', {'param': 2, 'id': usu.id})}}">Editar nombre</a>
+                <a class="btn btn-primary btn-sm active" role="button" aria-pressed="true" href="{{ path('profileeditUser', {'param': 3, 'id': usu.id})}}">Editar correo</a>
+                <a href="{{ path('profiledeleteUser', {id: usu.id}) }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Eliminar</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    {% include 'inc/paginador.tpl.twig' with {routerName: 'listaUsuarios'} %}
+{% endblock %}

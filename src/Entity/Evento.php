@@ -70,6 +70,11 @@ class Evento
      */
     private $imagen;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $localizacion;
+
     public function __construct()
     {
         $this->comentarios = new ArrayCollection();
@@ -233,6 +238,18 @@ class Evento
     public function setImagen(?string $imagen): self
     {
         $this->imagen = $imagen;
+
+        return $this;
+    }
+
+    public function getLocalizacion(): ?string
+    {
+        return $this->localizacion;
+    }
+
+    public function setLocalizacion(string $localizacion): self
+    {
+        $this->localizacion = $localizacion;
 
         return $this;
     }
