@@ -30,7 +30,7 @@ class CategoriaCreateType extends AbstractType{
                     'mimeTypesMessage'=>'El documento tiene que estar en formato jpg, png o gif',
                 ])]
             ])
-            ->add("btnEnviar", SubmitType::class, ["label"=>"Buscar"]);
+            ->add("btnEnviar", SubmitType::class, ["label"=>"Crear"]);
     }
 
     public function configureOptions(OptionsResolver $resolver) {
