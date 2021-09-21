@@ -41,5 +41,7 @@
         
     {% endfor %}
 
-    {% include 'inc/paginador.tpl.twig' with {routerName: 'index'} %}
+    <div id="paginador">
+        {% include 'inc/paginador.tpl.twig' with {routerName: 'index'} %}
+    </div>
 {% endblock %}

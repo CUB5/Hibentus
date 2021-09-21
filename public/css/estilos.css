@@ -26,7 +26,7 @@
 .wrap_cnt { position: relative; overflow: hidden; max-width:1600px; margin: 0 auto; }
 
 #wrapper {padding-left: 0px; margin-bottom: 70px; margin-right: 25px; max-width: 1600px; margin: 0 auto; overflow: hidden}
-.content { float: left; padding: 10px; width: 80%; margin-left: 80px;}
+.content { float: left; padding: 10px; width: 80%; margin-left: 80px; margin-bottom: 100px;}
 
 body{
     background-color: #f5f5fa;
@@ -57,7 +57,7 @@ body{
 
 
 
-
+#paginador{ margin-top: 200px; }
 
 #cntFooter { background-color: black; color:white; position: fixed; left: 0; bottom: 0; width: 100%;}
 #footer { padding: 20px 15px 10px; }
