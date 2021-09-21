@@ -2,36 +2,46 @@
 
 {% block body %}
     {% for evento in lstEventos %}
-        <div id="eventoIndex">
-            <section id="primeraLinea">
-                <div>
-                    <a href="{{ path("vistaEvento", {id: evento.id}) }}">
-                        <h1>{{ evento.nombre }}</h1>
-                    </a>
+            <section id="eventoIndex">
+                <div id="headerEventoIndex">
+                    <div>
+                        <a href="{{ path("vistaEvento", {id: evento.id}) }}">
+                            <h1>{{ evento.nombre }}</h1>
+                        </a>
+                    </div>
                 </div>
-                <div id="fechasEvento">
-                    Fecha inicio: {{evento.fechaInicio|date("d/m/Y")}}<br>
-                    Fecha fin: {{evento.fechaFin|date("d/m/Y")}}
-                </div>
-                <div id="localizacionEvento">
-                    {{ evento.localizacion }}
+
+                <div id="contentEventoIndex">
+                    <div id="leftEventoIndex">
+                        <div id="fechasEvento">
+                            <h5>{{ evento.idCategoria.nombre }}</h5>
+                            Fecha inicio: {{evento.fechaInicio|date("d/m/Y")}}<br>
+                            Fecha fin: {{evento.fechaFin|date("d/m/Y")}}
+                        </div>
+                        <div id="localizacionEvento">
+                            Localización: {{ evento.localizacion }}
+                        </div>
+                    </div>
+                    
+                    <div id="rightEventoIndex">
+                        <div id="descripcionEventoIndex">
+                            
+                            {{ evento.descripcion }}
+                        </div>
+                        <div id="imageEventoIndex">
+                            {% if evento.imagen %}
+                                <img  id="imagenIndex" src="{{ asset(evento.imagen)}}">
+                            {% else %}
+                                <img  id="imagenIndex" src="{{ asset(evento.idCategoria.imagen) }}">
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
             </section>
-            <div id="segundaLinea">
-                <div id="eventoCatDesc">
-                    <h5>{{ evento.idCategoria.nombre }}</h5>
-                    {{ evento.descripcion }}
-                </div>
-                <div>
-                    {% if evento.imagen %}
-                        <img  id="imagenIndex" src="{{ asset(evento.imagen)}}">
-                    {% else %}
-                        <img  id="imagenIndex" src="{{ asset(evento.idCategoria.imagen) }}">
-                    {% endif %}
-                </div>
-            </div>
-        </div>
+        
     {% endfor %}
 
-    {% include 'inc/paginador.tpl.twig' with {routerName: 'index'} %}
+    <div id="paginador">
+        {% include 'inc/paginador.tpl.twig' with {routerName: 'index'} %}
+    </div>
 {% endblock %}
