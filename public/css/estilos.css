@@ -42,7 +42,7 @@ body{
 
 
 
-#cntFooter { background-color: black; color:white; position: fixed; left: 0; bottom: 0; width: 100%;}
+#cntFooter { background-color: black; color:white; position: relative; left: 0; bottom: 0; width: 100%;}
 #footer { padding: 20px 15px 10px; }
 #footer > div { float: left; width: 33%; min-height: 1px; }
 #footer_left { text-align: left; padding-left: 40px; }
@@ -151,4 +151,21 @@ td a{
 
 #comentariosUser{
     margin-top:30px;
+}
+
+#enlaceCat{
+    text-decoration: none;
+    color:black;
+}
+
+#enlaceCat:hover{
+    color:darkblue;
+}
+
+#imgCat{
+    float:left;
+}
+
+#derCat{
+    margin-left: 360px;
 }

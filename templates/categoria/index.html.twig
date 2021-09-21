@@ -9,7 +9,16 @@
     {{ form(form) }}
     
     {% for categoria in lstCat %}
-        <h1>{{ categoria.nombre}}</h1>
+        <p id="categoriaInfo">
+            <img id="imgCat" src="{{ asset(categoria.imagen) }}">
+            <div id="derCat">
+                <a id="enlaceCat" href="{{ path('categoria', {'id':categoria.id }) }}">
+                    <h1>{{ categoria.nombre}}</h1>
+                </a>
+                <p id="descCat">{{categoria.comentario}}</p>
+            </div>
+        <p/>
+        <br><br><br>
     {% endfor %}
 
 {% endblock %}
