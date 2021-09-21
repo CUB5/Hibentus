@@ -162,8 +162,8 @@ class EventosController extends AbstractController {
         $todosEventosActivos=$consultaEventosActivos->getResult();
         $numEventos=count($todosEventosActivos);
         $maxPags=ceil($numEventos/$limit);
-        return $this->render("evento/activos.html.twig", [
-            "eventosActivos"=>$eventosActivos,
+        return $this->render("index/index.html.twig", [
+            "lstEventos"=>$eventosActivos,
             "nMaxPages"=>$maxPags,
             'page' => $page
         ]);
